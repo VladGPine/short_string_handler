@@ -17,11 +17,11 @@ def short_title_handler(text: str) -> str:
                     raw_string += each_word + ' '
                     result_string = f'{raw_string.strip()}...'
         elif len(text) == 0:
-            return 'Передана пустая строка!'
+            return 'Empty string!'
         else:
             result_string = text
     except AttributeError:
-        return 'Передана не строка!'
+        return 'Not a string!'
     else:
         return result_string
 
@@ -29,10 +29,10 @@ def short_title_handler(text: str) -> str:
 class StringTests(unittest.TestCase):
 
     def test_not_a_string(self):
-        self.assertEqual(short_title_handler(1), 'Передана не строка!')
+        self.assertEqual(short_title_handler(1), 'Not a string!')
 
     def test_empty_string(self):
-        self.assertEqual(short_title_handler(''), 'Передана пустая строка!')
+        self.assertEqual(short_title_handler(''), 'Empty string!')
 
     def test_less_than_25_symbols_one_word(self):
         word = 'Dichlorodifluoromethane'
