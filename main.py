@@ -10,14 +10,14 @@ def short_title_handler(text: str) -> str:
             raw_string = ''
             for each_word in all_words_in_text:
                 if len(all_words_in_text[0] + '...') > length_checker:
-                    result_string = all_words_in_text[0] + '...'
+                    result_string = all_words_in_text[0][:22] + '...'
                 elif len(raw_string + each_word + '...') > length_checker:
                     break
                 else:
                     raw_string += each_word + ' '
                     result_string = f'{raw_string.strip()}...'
         elif len(text) == 0:
-            return 'Empty string!'
+            return ''
         else:
             result_string = text
     except AttributeError:
@@ -32,7 +32,7 @@ class StringTests(unittest.TestCase):
         self.assertEqual(short_title_handler(1), 'Not a string!')
 
     def test_empty_string(self):
-        self.assertEqual(short_title_handler(''), 'Empty string!')
+        self.assertEqual(short_title_handler(''), '')
 
     def test_less_than_25_symbols_one_word(self):
         word = 'Dichlorodifluoromethane'
@@ -44,7 +44,7 @@ class StringTests(unittest.TestCase):
 
     def test_more_than_25_symbols_one_word(self):
         word = 'Antidisestablishmentarianism'
-        self.assertEqual(short_title_handler(word), f'{word}...')
+        self.assertEqual(short_title_handler(word), f'{word[:22]}...')
 
     def test_less_than_25_symbols_string(self):
         string = 'Hello buddy!'
